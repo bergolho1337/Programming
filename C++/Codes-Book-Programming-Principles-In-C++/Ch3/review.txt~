@@ -1,0 +1,75 @@
+1) What is meant by the term prompt ?
+	R: It is usually used when the user needs to take an action. Like writing his name in the console.
+
+2) Which operator do you use to read into a variable ?
+	R: The operator ">>".
+
+3) If you want the user to input an integer value into your program for a variable named number, what are two lines of code you could write to ask
+the user to do it and to input the value into your program ?
+	R: cout << "Write a integer number: ";
+	   cin >> number;
+
+4) What is '\n' called and what purpose does it serve ?
+	R: It a endline character. This is used whenever you want skip one line in your output.
+
+5) What terminates input into a string ?
+	R: A whitespace, a newline or a tab.
+
+6) What terminates input into an integer ?
+	R: A input that not fits into a integer type.
+
+7) How would you write
+	cout << "Hello,";
+	cout << first_name;
+	cout << "!\n";
+   as a single line of code ?
+	R: cout << "Hello," << first_name << "!\n";
+
+8) What is an object ?
+	R: An object is some memory that holds a value of a given type.
+
+9) What is a literal ?
+	R: Literal is a constant expression evaluation.
+
+10) What kinds of literals are there ?
+	R: Strings = "hello", 
+	   int = 2, 
+        double = 3.14, 
+        bool = true. 
+
+11) What is a variable ?
+	R: A variable is a named object.
+
+12) What are typical sizes for a char, an int, and a double ?
+	R: char = 1 byte = 8 bits
+	   int =  4 bytes = 32 bits
+	   double = 8 bytes = 64 bits
+
+13) What measures do we use for the size of smalls entities in memory, such as ints and strings ?
+	R: Bits
+
+14) What is difference between = and == ?
+	R: The '=' is an assignment symbol, it is used to store a value into a variable. And the '==' is an equal symbol, it is used to compare two
+values.
+
+15) What is a definition ?
+	R: A definition is declaration that sets aside memory for an object.
+
+16) What is a initialization and how does it differ from an assignment ?
+	R: A initialization puts a initial value into a variable, just to make sure that doesn't stores rubbish and for type safety. This is different from an assignment, as we want to use a new value we are assigning into a variable for our operations.
+
+17) What is string concatenation and how do you make it work in C++ ?
+	R: String concatenation appends the content of two strings. In C++ it can be made just by using the '+' operator between two strings.
+
+18) Which of the following are legal names in C++ ? If a name is not legal, why not ?
+	R: This_little_pig, This_1_is_fine, _this_is_ok, MiniMineMine, number.
+
+	Names in C++ must start with a letter and contains only letter, digits and underscores. So if contains spaces and other symbols will not be considered as names.
+
+19) Give five examples of legal names that shouldn't use bacause they like to cause confusion.
+	R: _this_is_ok -> It is not a good idea to start with underscore, because some variables are reserved to implementation and system entities.
+	   One 		-> the first word of a varaible should be lowercase, it can confuse the programmer.
+	   mvb		-> Acronymous can be confusing
+	   OQF
+	   SIZE		-> Uppercase names should be used for macros, not common variables.
+	 

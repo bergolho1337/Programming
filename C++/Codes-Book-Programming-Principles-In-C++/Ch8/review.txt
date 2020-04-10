@@ -1,0 +1,229 @@
+=====================================================================================================================
+
+1) What is the difference between a declaration and a definition ?
+    R: A declaration is a statement that introduces a name into the scope, besides a definition fully specifies
+the entity declared.
+
+=====================================================================================================================
+
+2) How do we syntactically distinguish between a function declaration and a function definition.
+    R:
+        Function declaration:
+            double sqrt (double x);
+        
+        Function definition:
+            double sqrt (double x) { /* IMPLEMENTATION */ }
+
+=====================================================================================================================
+
+3) How do we syntactically distinguish between a variable declaration and a variable definition.
+    R: 
+        Variable declaration:
+            extern int x;
+
+        Variable definition:
+            int x = 9;
+
+=====================================================================================================================
+
+4) Why can't you use the functions in the calculator program from Chapter 6 without declaring them first ?
+    R:
+        Because there is a cyclic pattern along the functions. So a forward declaration to avoid such problem.
+
+=====================================================================================================================
+
+5) Is int a; a definition or just a declaration ?
+    R:
+        It is a definition, because it consumes memory. After that 4 bytes of memory are allocated to variable 'a'.
+
+=====================================================================================================================
+
+6) Why is a good idea to initialize variables as they are declared ?
+    R:
+        Because reduce the chances of unknown bugs.
+
+=====================================================================================================================
+
+7) What can a function declaration consist of ?
+    R:
+        It consists of the return-type, a name for that function and a list of arguments that are necessary to run
+that function.
+
+=====================================================================================================================     
+
+8) What good does indentation do ?
+    R:
+        It makes the program more readable. Avoid some bugs that could be hidden in a non-indent code and also
+a reader could clearly visualize the scopes of each part of the program.
+
+=====================================================================================================================
+
+9) What are header files used for ?
+    R:
+        Is a file that handles all types of declarations that could be used in a program. Such headers are then
+included in source files to proper have their definitions.
+
+===================================================================================================================== 
+
+10) What is the scope of a declaration ?
+    R:
+        A scope is a region of a program text. When a name is declared in a scope and is valid, everything within
+that scope will be able to work with it until the end of the scope.
+
+===================================================================================================================== 
+
+11) What kinds of scope are there ? Give an example of each.
+    R:
+        Global scope:
+            void f (int x)
+            {
+                // Here the function 'f' is in global scope
+            }
+
+        Local scope:
+            void f (int x)
+            {
+                // Here the variable 'x' is in local scope inside the function 'f'
+            }   
+
+        Namespace scope:
+            A named scope nested in the global scope
+            namespace TextLib
+            {
+                class Text { /* ... */ };
+                class Glyph { /* ... */ };
+                class Line { /* ... */ };
+            }
+
+        Class scope:
+            The variables and functions of class A are inside a class scope.
+            class A
+            {
+                private:
+                    int x;
+
+                public:
+                    int powerOf2 (int x);
+            }
+
+        Statement scope:
+            Used in for-statement for instance. The variable 'i' will only exist inside the 'for'.
+            for (int i = 0; i < N; i++)
+
+===================================================================================================================== 
+
+12) What is the difference between a class scope and local scope ?
+    R:
+        A class scope will only work within a class, for example if a variable 'x' is define in a class and another
+variable 'x' is define outside this class, we could only acess he variable 'x' of class scope using a method or other
+kind of acess that are implemented by the class.
+        In a local scope this kind of situation cannot happen.
+
+===================================================================================================================== 
+
+13) Why should a programmer should minimize the number of global variables ?
+    R:
+        The main reason for that is hard to know which functions modify them. In a large program is impossible to
+know which functions modify a global variable. It always a good programming practise to minimize the number of 
+global variables in order to keep these control.
+
+===================================================================================================================== 
+
+14) What is the difference between pass-by-value and pass-by-reference ?
+    R:
+        Pass-by-value creates a copy of the value to the function, so any change in that variable will not be reflect
+on the scope that the variable was created only in scope of the function.
+        Pass-by-reference will pass a reference to the address of the variable, so changes inside the function will
+be reflected outside the scope of the function.
+
+===================================================================================================================== 
+
+15) What is the difference between pass-by-reference and pass-by-const-reference ?
+    R:
+        The pass-by-const-reference will not let the function modify the value passed by reference by accident. It
+is a good programming practise always to pass values by const-reference when the variable you are going to work in
+to big and you do not want any change on it.
+
+===================================================================================================================== 
+
+16) What is a swap() ?
+    R:
+        As function that change to values passed to it. There is an implementation of this in the STL.
+
+===================================================================================================================== 
+
+17) Would you ever define a function with a vector<double> by-value parameter ?
+    R:
+        Only if the vector is too small, because passing-by-value will always create a copy of that vector every
+time the function is called. Instead a will use a pass-by-const-reference.
+
+===================================================================================================================== 
+
+18) Give an example of undefined order of evaluation. Why can undefined order of evaluation be a problem ?
+    R:
+        int x = ++i + ++i;
+
+    It is not possible to predict the result of this operation in a different computer that used a different 
+compiler with different optimization flags.
+
+===================================================================================================================== 
+
+19) What do x&&y and x||y, respectively, mean ?
+    R:
+        x&&y = Is the value of 'x' AND the value of 'y' different than 0 ?
+        x||y = Is the value of 'x' OR the value of 'y' different than 0 ?
+
+===================================================================================================================== 
+
+20) Which of the following is standard-conforming C++: functions within functions, functions within classes, 
+classes within functions ? 
+    R:
+        Functions within classes, classes within classes, classes within functions and blocks within functions are
+legal in C++.
+
+===================================================================================================================== 
+
+21) What goes into an activation record ?
+    R:
+        Normally the information that the function needs to return to its caller and to return a value to its caller.
+
+===================================================================================================================== 
+
+22) What is a call stack and why do we need one ?
+    R:
+        Is a stack that keeps each calling of a function. It grows each time a function called and it shrinks when
+a the function returns to its caller. The call stack is important for debugging and to keep the call history of a
+program.
+
+===================================================================================================================== 
+
+23) What is the purpose of a namespace ?
+    R:  
+        Organize classes, functions, data and types into an identifiable and named part of a program without
+defining a type.
+
+===================================================================================================================== 
+
+24) How does a namespace differ from a class ?
+    R:
+        A namespace is not a type instead of a class.
+    
+===================================================================================================================== 
+
+25) What is a using declaration ?
+    R:
+        Is a way to force the compiler to look into a specific namespace for a name.
+
+===================================================================================================================== 
+
+26) Why should you avoid using directives in a header ?
+    R:
+        The problem is that you lose track of which names comes from where.
+
+===================================================================================================================== 
+
+27) What is namespace std ?
+    R:
+        Is the the standard namespace from C++.
+
+===================================================================================================================== 

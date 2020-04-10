@@ -1,0 +1,73 @@
+1 - What are the two parts of a class, as described in the chapter ?
+
+R: They are the interface and the implementation. The interface is the part of the class's declaration that its users acess directly. The implementation is the part
+of class's declaration that its users acess only indirectly through the interface.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2 - What is the difference between the interface and the implementation in a class ?
+
+R: The difference is that in the interface the users can acess the declarations directly. In the implementation section the users can only acess its content by using
+the interface functions.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3 - What are the limitations and problems of the original Date struct that is created in the chapter ?
+
+R: One major problem is that we did not specify a constructor or a way to initialize a default Date, this is important to guarantee that if the user forget to put a
+value on one of the struct variables the compiler did not end up setting an invalid Date. Also there no verification in the struct that we assigned a valid Date, so 
+it is possible to have negative days, months and even year in this implementation. Another problem is that all the variables in the struct are public, so
+everybody could have acess and modified its content. 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4 - Why is a constructor used for the Date type instead of an init_day() function ?
+
+R: Using a constructor for Date will force the programmer to specify the arguments needed to build a valid object of the class Date every time he tries to create a new 
+one. Another reason is that to create an array of Dates the use of a constructor will make the code much more easier and readable, if the init_day() function was use
+we will have to explicitly called it for every single element in the array. (It is prone to errors)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5 - What is an invariant ? Give an example.
+
+R: An invariant in the perpective of a class is a set of arguments that make an instance of that class to be valid. Invariants are important to build 
+default-constructors for classes and the idea of inheritance. An invariant for the builtin string class is the empty string and for the vector class is an empty array.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6 - When should functions be put in the class definition, and when should they be defined outside the class ? Why ?
+
+R: Normally functions that has few lines of code should be put in the class definition, this is because the function will be inline; that is, the compiler will try
+to generate code for the function at each point of call rather than using a function call instruction (pushing into the stack). But also all uses of the class must be
+recompiled whenever we make a change in the body of an inlined function, so for large programs this could be a problem. In this scenario the function should be defined
+outside the class.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7 - When should operator overloading be used in a program ? Give a list of operators taht you might want to overload (each with a reason);
+
+R: It is generally a good idea to define operators for a type when they will have a big positive change to your code. One example of it will be defining a class
+Matrix an overloading the '+' operator to make a matrix addiction or even the '*' making a matrix multiplication much more simple than the conventional code.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8 - Why should the public interface to a class be as small as possible ?
+
+R: The main reason is to ease comprehension, implementation and maintenance. A small class interface is easy to read and much more simple to make changes if a bug
+appear.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+9 - What does adding const to a member function do ?
+
+R: It makes the member immutable, so any operation that tries to change the value of that member will alert the compiler an spawn an error.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+10 - Why are "helper functions" best placed outsie the class definition ?
+
+R: Because helper functions often take arguments of the classes that they are helpers of. Also, any bugs on this function will not change the data in a class
+object. Another reason is to make the class definition shorter and more easy to understand.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

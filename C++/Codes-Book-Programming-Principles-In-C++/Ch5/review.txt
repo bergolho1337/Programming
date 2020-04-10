@@ -1,0 +1,140 @@
+1) Name four major types of errors and briefly define each one.
+R:
+    Compile-time error -> errors found by the compiler such as syntax errors and type errors.
+    Link-time error -> errors that occur when the linker cannot combine object files into an executable program.
+    Run-time error -> errors found by checks in the running program, like array out of bounds and segmentation fault.
+    Logic error -> errors found by the programmer looking for erroneous results.
+
+2) What kinds of errors can we ignore in student programs ?
+R:
+    Misbehaving hardware and system softwares.
+
+3)  What guarantees should every completed project offer ?
+R:
+  Should produce the desired results for all legal inputs and should give reasonable error messages for illegal inputs.
+
+4) List three approaches we can take to eliminate errors in programs and produce acceptable software.
+R:
+  Debugging, organize code and make sure that any other error is minor.
+
+5) Why do we hate debugging?
+R:
+  Because for some ones can be tedious, boring and time-consuming.
+
+6) What is syntax error? Give 5 examples
+R:
+  A misspelled word that don't match the language specification and definitions that must be followed.
+  - Cout instead of cout;
+  - Forget a semi-column;
+  - Forget a sign of '<' in a 'cout <<' statement
+  - Do not declare a variable before it's use
+
+7) What is type error? Give 5 examples
+R:
+  Erroneous or undesirable program behaviour caused by a discrepancy between different data types for the program's constants, variables and
+  methods. e.g., treating an integer(int) as a floating-point number (float).
+
+  - int as string
+  - int as float
+  - char as int
+  - bool as double
+  - vector as string
+
+8) What is a linker error? Give 3 examples
+R:
+  Is an error that occur in the linking process where the linker get together all the object files to build the executable program. If
+you forget to include one object file that has a function declaration that will be used in the program it will cause that error.
+  - Mispelled functions names
+  - You use the X Windows XDrawLine() function (and include the header file for it), but forget to use the -lX11 option to tell the linker
+to use the X Windows library. It will complain that doesn't know the XDrawLine().
+
+9) What is a logic error ? Give 3 examples
+R:
+  Is an error that makes the program to operate incorrectly, but it will not crash.
+
+  - The average of two values: A + B / 2 ---> will do the division first, so the result will be wrong.
+
+10) List 4 potential sources of programs errors discussed in the text.
+R:
+  - Human factor, the program is built by a human, so failure is always possible.
+  - Communication failure, lack of communication or erroneous communication during software development.
+  - Unrealistic development timeframe, software that is been develop in a crazy release schedule, with limited/insufficient resources
+and with unrealistic program deadlines. There will be not time for testing or a better design.
+  - Poor coding practices, bad coding practices such as inefficient or missing error/exception handling, lack of proper validations
+(datatype, field range, boundary, conditions, memory overflows) may lead to introduction of errors in the code.
+
+11) How do you know if a result is plausible ? What techniques do you have to answer such questions ?
+R:
+    Make estimation combining common sense and some arithmetic.
+
+12) Compare and contrast having the caller of a function handle a run-time error vs. the called function's handling the run-time error.
+R:
+  If the caller handles the error that must be a test that will make this verification, if the caller forgets the program could have a
+bad behaviour. Also it will not bring a good code.
+
+  By the way if the callee deals with this verification we can make the verification inside the proper function, so it will not lead
+to always had the caller code be checking if the function worked properly.
+
+13) Why is using exceptions a better idea than returning an "error" value ?
+R:
+  Because we could manage each kind of error properly, making a more sofiscated code where it is possible to redirect the execution in a
+way that the program don't crash and at the same time tell the user what kind of error appear during the execution.
+
+14) How do you test if a an input operation succeeded?
+R:
+  Surround it in a try/catch statement and catching a run-time error.
+
+15) Describe the process of how exceptions are thrown and caught.
+R:
+  The basic idea is that if a function finds an error that it cannot handle, it does not return normally; instead, it throws an exception
+indicating what went wrong. Any direct or indirect caller can catch the exception, that is, specify what to do if the called code used
+thrown.
+
+16) Why, with a vector called v, is v[v.size()] a range error? What would be the result of calling this?
+R:
+  Because the size of a vector goes from [0 ... v.size()-1], so there will not be a valid element at this index in the vector. It will
+throw a out_of_range exception.
+
+17) Define pre-condition and post-condition; give an example (that is not the area() from this chapter), preferably a computation that
+requires a loop.
+R:
+  A pre-condition is normally a if-statement right at the start of a function that checks if required arguments are correct.
+  A post-condidtion it also checks for errors, but instead of checking the inputs of a function, it will verify if the returned value
+is valid or correct.
+
+  Example:
+
+  int volume (int length, int width, int height)
+  // It calculates volume of a rectangle;
+  // pre-condition: length, width and height must be positive integers
+  // post-condition: returns a positive value that is the volume
+  {
+    if (length <= 0 || width <= 0 || height <= 0) error("volume() pre-condition");
+    int v = length*width*height;
+    if (v <= 0) error("volume() post-condition");
+    return v;
+  }
+
+18) When would you not test a pre-condition ?
+R:
+  - When nobody give bad arguments (probaly never ;D)
+  - It could slow down my program
+  - It could be complicated to check it
+
+19) When would you not test a post-condition ?
+R:
+  When the pre-condition handles all the possible errors.
+
+20) What the steps in debugging a program ?
+R:
+  - Get the program to compile
+  - Get the program to link
+  - Get the program to do what it is supposed to do
+
+21) Why does commenting helps when debugging ?
+R:
+  We could explain much better in simple English what the piece of code does than properly reading the code itself.
+
+22) How does testing differ from debugging ?
+R:
+  The testing phase is where we will try to break our code by trying different kinds of inputs and checking if it will cause errors.

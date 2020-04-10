@@ -1,0 +1,68 @@
+1) When dealing with input and output, how is the variety of devices dealt with in most modern computers ?
+    R: Nowdays we have lots different devices, from the simple ones like keyboards, mouse movements and graphical interfaces to more complex ones 
+    like signal processing for traffic lights, thermal regulation on power plants and even orbit of satellite.
+
+2) What, fundamentally, does an istream do ?
+    R: An istream is a buffer that communicates with the operating system. With an istream, the buffering can be quite visible to the user.
+    For example, an istream that is attached to the keyboard, the buffer is visible when you are typing characters until you hit Enter.
+    So basically an istream is buffer that makes possible the communication between the user and the program.
+
+3) What, fundamentally, does an ostream do ?
+    R: One of the major uses of an ostream is to produce data for humans to read. This data could be formatted according to specific taste, but
+    in general the main purpose of an ostream is to provided an easy way to output these results to the user.
+
+4) What, fundamentally, is a file ?
+    R: A file is simply a sequence of bytes numbered from 0 upward that could be stored on the main memory of a computer and that doesn't disappear 
+    when the power is turned off.
+
+5) What is a file format ?
+    R: A file format is a set of rules that determine what the bytes mean.
+
+6) Name four different types of devices that can require I/O for a program ?
+    R: Keyboard, mouse, GUI and printer.
+
+7) What are the four steps for reading a file ?
+    R: 1- Opening the file
+       2- Read the data from the file
+       3- Process the data
+       4- Close the file
+
+8) What are the four steps for writing a file ?
+    R: 1- Opening the file
+       2- Process the output data
+       3- Write the data to the file
+       4- Close the file
+
+9) Name and define the four stream states.
+    R: 1- good() = The operation succeeded.
+       2- eof()  = We hit end of input ("end of file")
+       3- fail() = Something unexpected happened (e.g, we looked for a digit and found a letter)
+       4- bad()  = Something unexpected and serious happened (e.g, a disk read error).
+
+10) Discuss how the following input problems can be resolved:
+    a. The user typing an out-of-range value 
+        R: Thrown a bad() signal because of the index out of bounds exception.
+    b. Getting no value (end of file) 
+        R: Simple return an eof() signal to the user alerting him that we reach "end of file".
+    c. The user typing something of the wrong type 
+        R: Thrown a fail() signal and give the user another chance to give the correct input.
+
+11) In what way input is harder than output ?
+    R: Errors in input are more likely to happen than in output. Mostly because humans make mistakes (misunderstanding instructions and mistyping).
+    Ways to treat these mistakes can be difficult, but are necessary to make a good program.
+
+12) In what way output is harder than input ?
+    R: Output errors could appear when an specific format is not well defined. Leading to an inappropriate file read after the write.
+
+13) Why do we often seperate input and output from computation ?
+    R: Mostly because I/O operations depends on the operating system, which in some cases could not be available at the moment of the statement.
+
+14) What are the most common uses of the istream member function clear() ?
+    R: One common use for the clear() function is when dealing with format errors and we need to switch between stream states. Another is use is to
+    reopen the stream.
+
+15) What are the usual function declarations for << and >> for an user-defined type X ?
+    R: istream& operator>> (istream &is, X &x)
+       ostream& operator<< (ostream &os, const X &x)
+       
+        

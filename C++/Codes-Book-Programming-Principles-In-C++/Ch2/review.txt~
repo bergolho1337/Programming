@@ -1,0 +1,32 @@
+1) What is the purpose of the "Hello world" program ?
+	R: It prints the message "Hello world" to the user via console and wait him until he types a character to exit the execution.
+
+2) Name the four parts of a function.
+	R: A return type (such as int, double, ...), a name (to identify the function), parameters (arguments necessary for the function) and
+a body (what it really the function does).
+
+3) Name a function that must appear in every C++ program.
+	R: The "main" function should always appear in a C++ program because we need to inform where our program begins.
+
+4) In the "Hello world" program, what is the purpose of the line "return 0" ?
+	R: Is signal given to the operational system (OS) to say that the program executed and terminated sucessfully.
+
+5) What is the purpose of the compiler ?
+	R: Check if there are syntax and semantic errors in the source code of a program and most important build the object code needed to execute
+him.
+
+6) What is the purpose of the #include directive ?
+	R: This directive tell the compiler that for execute that program we need a library that contains what we going to use.
+
+7) What does a .h suffix at the end of a file name signify in C++ ?
+	R: It identifies a header file.
+
+8) What does a linker do for your program ?
+	R: It makes the executable for your program using the object file that was created by the compiler.
+
+9) What is the difference between a source file and an object file ?
+	R: The object file is the compiled version of the source file. 
+
+10) What is an IDE and what does it do for you ?
+	R: IDE is Interactive Development Environment is a program that help programmer to build the source code. Usually gives helpful features
+like color coding and other facilities that help us debug our code. 

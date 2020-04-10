@@ -1,0 +1,13 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main ()
+{
+	cout << "Hello world!\n";
+	keep_window_open();
+	return 0;
+}
