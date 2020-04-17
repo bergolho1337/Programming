@@ -1,0 +1,3 @@
+This is an example of line to be splitted
+Here is another line to be processed by my program
+Programming is the best activity

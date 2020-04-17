@@ -1,0 +1,116 @@
+1) Why is I/O tricky for a programmer?
+    R: I/O is difficult for several reasons, like for example, the user might want a very specific output to their program or in some cases the way it is presented may affect their interpretation. For instance,
+a 1.25 and 1.2545678 are completely different to a physicist who works with an experiment. Because of that, programmers should always try to provide the best software to their "consumers" expectations.
+
+2) What does the notation << hex do?
+    R: This notation changes the default integer output of a stream from decimal to hexadecimal.
+
+3) What are hexadecimal numbers used for in computer science? Why?
+    R: Hexadecimal are normally used when dealing with machine code or hardware-related information. Mostly, because a hexadecimal digit contains 4-bit values, and frequently, a word or a register are composed by 32-bit values and a way
+to better format either reading or writing of assembly code for example, the hexadecimal format is commonly used.
+
+4) Name some of the options you may want to implement for formatting integer output.
+    R: oct -> octal base
+       hex -> hexadecimal base
+       dec -> decimal base
+       showbase -> add the prefix 0 for octal and 0x for hexadecimal
+       noshowbase -> dont`t use prefix
+
+5) What is a manipulator?
+    R: A manipulator is any term which is able to change the bahaviour of a stream.
+
+6) What is the prefix for decimal? For octal? For hexadecimal?
+    R: dec, oct, hex
+
+7) What is teh default output format for flaoting-point values?
+    R: defaultfloat
+
+8) What is a field?
+    R: It is the ammount of space a value takes up on output.
+
+9) Explain what setprecision() and setw() do.
+    R: The setprecision() modifies the output precision of a given floating-point number to a certain number, which is passed as an argument to the function.
+       The setw() specifies the width of the field of a variable. The size of the field is an input parameter of the function. In addition, different from the setprecision(), the setw() modifier does not stack.
+
+10) What is the purpose of file open modes?
+    R: Basically the main purpose is to allow the programmer to choose the most appropriate mode to a specific application. For example, in some cases the default 'istream' is enough to read a certain datafile, but if the we need to
+deal with a binary file that stores some other data, the binary mode for reading should be used.
+
+11) Which of the following manipulators does not "stick": hex, scientific, setprecision(), showbase, setw?
+    R: setw
+
+12) What is the difference between character I/O and binary I/O?
+    R: A character I/O is based on reading/writing sequence of characters and transform it into an object of the desired type. While binary I/O, will read/write directly the bytes from the stream and parse it to the desired type
+, which turns out to be quicker than character I/O, but much more suitable for errors to happen.
+
+13) Give an example when it would probably be beneficial to use a binary file instead of a text.
+    R: Suppose that in some application a certain data is written in binary to reduce its size. In order to read this information you certainly going to use the binary format mode since teh text format will surely not work. 
+
+14) Give two examples where a stringstream can be useful?
+    R: 
+==================================================    
+Parsing input arguments from the command line:
+==================================================
+    int str_to_integer (string s)
+    {
+        int ret;
+
+        istringstream is(s);
+        is >> ret;
+
+        return ret;
+    }
+    double str_to_float (string s)
+    {
+        double ret;
+
+        istringstream is(s);
+        is >> ret;
+
+        return ret;
+    }
+
+    int main (int argc, char *argv[])
+    {
+        if (argc-1 != 3)
+        {
+            cout << "Usage:> ./main <integer_value> <float_value>" << endl;
+            exit(EXIT_FAILURE);
+        }
+
+        string integer_string(argv[1]);
+        string float_string(argv[2]);
+
+        int integer_value = str_to_integer(integer_string);
+        double float_value = str_to_double(float_string);
+
+        return 0;
+    }
+
+==================================================    
+Writing a logfile:
+==================================================
+int main ()
+{
+    for (int i = 0; i < max_iterations; i++)
+    {
+        // Do some calculus ...
+
+        int cur_iter = i;
+        ostringstream filename;
+        filename << "iteration_" << cur_iter << ".log";     // Set the name of the current file -> e.g = "iteration_10.log"
+        ofstream logfile(filename.str());                   // Open the file for writing
+    }
+}
+
+15) What is file position?
+    R: File position is the possibility to select a specefic place in a file for reading or writing.
+
+16) What happens if you position a file position beyond the end of the file?
+    R: In particular, it is undefined what actually happens if you try to seek a position beyond the end of the file. Some operating system may have different handlings for this kind of problem.
+
+17) When would you prefer line-oriented input to type-specific input?
+    R: Line-oriented is more suitable for inputs that comes in lines and the programmer normally needs to tokenize its content. On the other hand, when the input is well-formatted a type-specific input should be used.
+
+18) What does isalnum(c) do?
+    R: The isalnum(c) function tests if the character 'c' is either a letter or a decimal digit.

@@ -1,0 +1,3 @@
+SOME TEXT HERE " - don't use the as-if rule." TESTING ,,,,,,,JUICE;;;;;;;;BARRRIER???????BRaZIL!!!!!!
+This string will be cast to lowercase " the double quotes should remain sticks. " ''''''''s'''''''
+,,,,,, don't ......... can't ????????? mustn't ------------- doesn't have? "Below zero temperature!!!!!"
