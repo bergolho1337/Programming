@@ -13,8 +13,12 @@ def main ():
     y = f(x)
     
     plt.grid()
+    plt.title("Pruning function")
+    plt.xlabel("level")
+    plt.ylabel("%")
     plt.plot(x,y)
-    plt.show()
+    #plt.show()
+    plt.savefig("pruning_function.pdf")
 
 if __name__ == "__main__":
     main()
