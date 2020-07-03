@@ -12,4 +12,8 @@ box_plot_data=[value1,value2,value3,value4]
 
 # Call the Matplotlib function
 plt.boxplot(box_plot_data)
+plt.title("Boxplot example")
+plt.ylabel("Data value")
+plt.xlabel("Data class")
+plt.xticks([1,2,3,4],["A","B","C","D"])
 plt.show()
