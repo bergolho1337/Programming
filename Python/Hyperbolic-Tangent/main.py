@@ -17,6 +17,7 @@ def main ():
     y1 = f2(x,3)
     y2 = f2(x,5)
     y3 = f2(x,7)
+    y4 = f2(x,2.81354619)
 
     #for i in range(len(x)):
     #	print("%g %g" % (x[i],y[i]))
@@ -28,9 +29,10 @@ def main ():
     plt.plot(x,y1,label="soft (D=3)",color="blue")
     plt.plot(x,y2,label="moderate (D=5)",color="orange")
     plt.plot(x,y3,label="heavy (D=7)",color="red")
+    plt.plot(x,y4,label="DE-best (D=2.81354619)",color="black")
     plt.legend(loc=0)
     #plt.show()
-    plt.savefig("pruning_function_2.pdf")
+    plt.savefig("pruning_function_3.pdf")
 
 if __name__ == "__main__":
     main()
