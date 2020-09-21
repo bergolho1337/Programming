@@ -11,12 +11,17 @@ def read_data (input_file):
 def plot_data(x, y):
 	plt.grid()
 	plt.plot(x, y, label="y", c="black", linewidth=3.0)
-	plt.xlabel("x",fontsize=15)
-	plt.ylabel("y",fontsize=15)
-	plt.title("f(x)",fontsize=14)
+	#plt.plot(x, y/1000, label="CV", c="black", linewidth=3.0)
+	#plt.plot(x, y, 'o', c="black")
+	#plt.ylabel("v(m/s)",fontsize=15)
+	#plt.xlabel(r'$\sigma$(mS/um)',fontsize=15)
+	plt.ylabel("y", fontsize=15)
+	plt.xlabel("x", fontsize=15)
+	#plt.title("Conductivity x Propagation velocity (Trovato model)",fontsize=14)
+	plt.title("f(x)", fontsize=14)
 	plt.legend(loc=0,fontsize=10)
 	plt.show()
-	#plt.savefig("ap.pdf")
+	#plt.savefig("trovato_sigma_x_cv.svg")
 
 
 def main():
