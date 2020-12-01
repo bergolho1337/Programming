@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/berg/Github/Programming/C/Priority-Queue/src/main.c
+stdio.h
+-
+stdlib.h
+-
+queue/pqueue.h
+/home/berg/Github/Programming/C/Priority-Queue/src/queue/pqueue.h
+
+/home/berg/Github/Programming/C/Priority-Queue/src/queue/pqueue.h
+

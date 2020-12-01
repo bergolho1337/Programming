@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/PriorityQueue.dir/src/main.c.o  -o ../bin/PriorityQueue src/queue/libpqueue.a -ldl -lm 

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpqueue.a  CMakeFiles/pqueue.dir/pqueue.c.o
+/usr/bin/ranlib libpqueue.a
