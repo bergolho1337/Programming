@@ -1,4 +1,5 @@
 // ---------------------------------------------------------------------------------------------
+// Strategy design pattern:
 // Example program that demonstrates how to use inheritance alongside interfaces in C++
 // ---------------------------------------------------------------------------------------------
 
