@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstdio>
 
-// Abstract class
+// Abstract class - Interface
 class FlyBehaviour
 {
 public:
@@ -30,7 +30,7 @@ public:
     void fly ();
 };
 
-// Abstract class
+// Abstract class - Interface
 class QuackBehaviour
 {
 public:

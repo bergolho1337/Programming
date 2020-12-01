@@ -1,4 +1,6 @@
-// Template C++ program
+// ---------------------------------------------------------------------------------------------
+// Example program that demonstrates how to use inheritance alongside interfaces in C++
+// ---------------------------------------------------------------------------------------------
 
 #include <iostream>
 #include "ducks/duck.h"
@@ -42,19 +44,3 @@ int main (int argc, char *argv[])
 
 	return 0;
 }
-
-
-/*
-	int n = atoi(argv[1]);
-
-	struct stop_watch solver_time;
-	init_stop_watch(&solver_time);
-
-	start_stop_watch(&solver_time);
-
-	solve_problem(n);
-	
-	long res_time = stop_stop_watch(&solver_time);
-	double conv_rate = 1000.0*1000.0*60.0;
-	std::cout << "Resolution Time: " << res_time << " μs (" << res_time/conv_rate << " min)" << std::endl;
-*/
