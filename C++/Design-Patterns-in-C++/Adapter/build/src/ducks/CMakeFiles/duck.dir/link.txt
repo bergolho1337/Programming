@@ -1,0 +1,2 @@
+/usr/bin/ar qc libduck.a  CMakeFiles/duck.dir/duck.cpp.o CMakeFiles/duck.dir/turkey.cpp.o
+/usr/bin/ranlib libduck.a

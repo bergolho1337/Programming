@@ -1,0 +1,1 @@
+/usr/bin/c++  -O2 -DNDEBUG  -rdynamic CMakeFiles/DucksAdapter.dir/src/main.cpp.o  -o ../bin/DucksAdapter src/ducks/libduck.a src/utils/libutils.a -ldl -lm 

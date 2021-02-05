@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/src/ducks/duck.h
+iostream
+-
+cstdio
+-
+turkey.h
+/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/src/ducks/turkey.h
+
+/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/src/ducks/turkey.h
+iostream
+-
+cstdio
+-
+
+/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/src/main.cpp
+iostream
+-
+ducks/duck.h
+/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/src/ducks/duck.h
+

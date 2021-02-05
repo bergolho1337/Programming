@@ -1,0 +1,259 @@
+! ========================================================
+! DATA DE CRIACAO: 07-12-2014
+! Programador: Lucas Arantes Berg e Simpliciano
+! ULTIMAS ALTERACOES : 10-12-2014
+! ========================================================
+! Modelo de Ising e Algoritmo de Metropolis  
+! ========================================================
+
+program metropolis
+implicit none
+
+integer, dimension(10,10) :: m
+integer :: i, j, k, r, seed, N, status_system, cont
+integer :: delta_E, E_old
+real(kind=8) :: E_total, M_total, beta
+
+cont = 0
+beta = 0.5
+
+! SETAR O NUMERO DE ITERACOES
+N = 50000
+
+! ABRE ARQUIVO PARA SAIDA DE DADOS
+open(UNIT=20,FILE='dados.dat',ACTION='WRITE')
+open(UNIT=22,FILE='dados2.dat',ACTION='WRITE')
+
+! INICIALIZA O SEED DE NUMEROS ALEATORIOS
+seed = time()
+call srand(seed)
+
+! CONSTROI A MATRIZ COM A CONFIGURACAO INICIAL DA REDE
+do i = 1, 10
+	do j = 1, 10
+		call sorteiaZeroUm(r)
+		m(i,j) = r
+	end do
+end do
+
+! REALIZA ITERACOES PARA MUDANCAS NA CONFIGURACAO DO SISTEMA
+do k = 1, N
+	! SORTEIA QUAL PARTICULA SOFRERA ALTERACAO
+	call sorteiaLinhaColuna(i,j)
+	! CALCULA A VARIACAO DE ENERGIA DO SISTEMA ATUAL 
+	call calculaEnergia(i,j,delta_E,m,E_old)
+	! ACEITAR ESSE ESTADO ?
+	call aceitaEstado(i,j,m,delta_E,beta,cont)
+	! CALCULA A ENERGIA MEDIA DA REDE NO PASSO
+	call calculaEnergiaMedia(delta_E,m,E_total,E_old,M_total)
+	write(20,*) k, E_total
+	write(22,*) k, M_total
+end do
+
+close(20)
+close(22)
+
+! ESCREVE O ARQUIVO DE PLOT DA ENERGIA USANDO O GNUPLOT
+call escreveArquivoPlotEnergia()
+
+! CHAMA O SHELL PARA GERAR A IMAGEM DO GRAFICO
+call SYSTEM("gnuplot graph.plt",status_system)
+
+! CHECA PARA VER SE TUDO OCORREU DE ACORDO
+if (status_system == 0) then
+	write(*,*) "[+] Grafico gerado com sucesso"
+else
+	write(*,*) "[-] ERRO! Durante a geracao do grafico"
+end if
+
+! ESCREVE O ARQUIVO DE PLOT DA MAGNETIZAÇÃO USANDO O GNUPLOT
+call escreveArquivoPlotMagnetizacao()
+
+! CHAMA O SHELL PARA GERAR A IMAGEM DO GRAFICO
+call SYSTEM("gnuplot graph.plt",status_system)
+
+! CHECA PARA VER SE TUDO OCORREU DE ACORDO
+if (status_system == 0) then
+	write(*,*) "[+] Grafico gerado com sucesso"
+else
+	write(*,*) "[-] ERRO! Durante a geracao do grafico"
+end if
+
+
+end program metropolis
+
+
+! ==================================================================
+! SUBROTINA QUE SORTEIA OU ZERO OU UM. USADO PARA OS SPINS DA REDE
+! SE FOR 0 CONVERTE PARA -1
+subroutine sorteiaZeroUM (r)
+implicit none
+
+integer, intent(out) :: r
+
+r = INT(rand(0)*(1+1-0)+0)
+if (r == 0) then
+	r = -1
+end if
+
+return
+end subroutine
+
+! ==================================================================
+! SUBROTINA QUE SORTEIA UMA LINHA E UMA COLUNA DA MATRIZ
+subroutine sorteiaLinhaColuna (m,n)
+
+integer, intent(out) :: m, n
+m = INT(rand(0)*10)+1
+n = INT(rand(0)*10)+1
+return
+end subroutine 
+
+! =================================================================================
+! SUBROTINA QUE CALCULA O VALOR DA ENERGIA ATUAL DO SISTEMA
+! E_new - E_out = 2*J*sk_old*sum(si_old),  com J = 1 para o alinhamento dos spins
+subroutine calculaEnergia (i,j,delta_E,m,E_old)
+
+integer :: lin_cima, lin_baixo, col_esquerda, col_direita, l, c
+integer :: delta_E_old, delta_E_new
+integer, dimension(10,10), intent(out) :: m
+integer, intent(in) :: i, j
+integer, intent(out) :: delta_E, E_old
+
+! SETA OS VIZINHOS DA PARTICULA
+lin_cima = i - 1
+lin_baixo = i + 1
+col_esquerda = j - 1
+col_direita = j + 1
+! VERIFICA SE A PARTICULA ESTA NA BORDA DA REDE (casos particulares)
+if (i == 1) then
+	lin_cima = 10
+	lin_baixo = 2
+end if
+
+if (i == 10) then
+	lin_cima = 9
+	lin_baixo = 1
+end if 
+
+if (j == 1) then
+	col_esquerda = 10
+	col_direita = 2
+end if
+
+if (j == 10) then
+	col_esquerda = 9
+	col_direita = 1
+end if
+
+! CALCULA A ENERGIA NO ESTADO ANTERIOR, ANTES DE FLIPAR (eq.1)
+E_old = -1*m(i,j)*(m(lin_cima,j)+m(i,col_direita)+m(i,col_esquerda)+m(lin_baixo,j))
+
+! REALIZA O CALCULO DA VARIACAO ENERGIA: J = 1
+delta_E = 2*1*m(i,j)*(m(lin_cima,j)+m(i,col_direita)+m(i,col_esquerda)+m(lin_baixo,j))
+
+return
+end subroutine
+
+! ============================================================
+! SUBROTINA PARA ACEITACAO DE UMA NOVA CONFIGURACAO
+subroutine aceitaEstado (i,j,m,delta_E,beta,cont)
+
+integer, dimension(10,10), intent(out) :: m
+integer, intent(in) :: i, j, delta_E
+integer, intent(out) :: cont
+real(kind=8), intent(in) :: beta
+real(kind=4) :: A
+
+
+! UTILIZA A EQUACAO (7) PARA VERIFICAR A ACEITACAO
+if (delta_E > 0) then
+	A = exp(-beta*REAL(delta_E))
+	!write(*,*) "delta_E > 0"
+else
+	A = 1
+	!write(*,*) "delta_E <= 0"
+end if
+
+! SE (r < A) FLIPAR O SPIN
+if (rand() < A .or. A == 1) then
+	m(i,j) = -m(i,j) 
+	cont = cont + 1
+	!write(*,*) "==========================================="
+	!write(*,*) "A = ",A,"  r = ",rand() 
+	!write(*,*) "[+] Flipou o spin!",cont
+	!write(*,*) "==========================================="
+end if 
+
+return
+end subroutine
+
+! ====================================================================
+! SUBROTINA QUE PERCORRE A REDE CALCULANDO A VARIACAO DE ENERGIA
+! DE CADA PARTICULA. ALÉM DE CALCULAR A MAGNETIZAÇÃO TOTAL NO ESTADO
+! ANTES DE FLIPAR O SPIN. USA-SE AS EQUAÇÕES (11) E (12)
+subroutine calculaEnergiaMedia (delta_E,m,E_total,E_old,M_total)
+
+integer :: i, j
+integer, intent(out) :: delta_E, E_old
+integer, dimension(10,10), intent(out) :: m
+real(kind=8), intent(out) :: E_total, M_total
+
+! INICIALIZA COM ZERO O TOTAL DE ENERGIA DA REDE E
+! A MAGNETIZAÇÃO TOTAL 
+E_total = 0
+M_total = 0
+
+! PARA CADA PARTICULA CALCULAR A VARIACAO DE ENERGIA E A ENERGIA NO ESTADO ANTERIOR (eq.11)
+do i = 1, 10
+	do j = 1, 10
+		call calculaEnergia(i,j,delta_E,m,E_old) 
+		E_total = E_total + (REAL(delta_E+E_old))
+		M_total = M_total + m(i,j)
+	end do
+end do
+
+return
+end subroutine 
+
+! ========================================================================
+! SUBROTINA QUE ESCREVE UM ARQUIVO PLOT DA MAGNETIZAÇÃO USANDO O GNUPLOT
+subroutine escreveArquivoPlotMagnetizacao ()
+
+open(UNIT=21,FILE='graph.plt',ACTION='WRITE')
+
+write(21,*) "set title 'Magnetização'"
+write(21,*) "set grid"
+write(21,*) "set xlabel 'passos'"
+write(21,*) "set ylabel 'M'"
+write(21,*) "set yrange [0:150]"
+write(21,*) "set terminal png"
+write(21,*) "set key bottom right"
+write(21,*) "set output 'grafico2.png'"
+write(21,*) "plot 'dados2.dat' title 'M_total' w l"
+
+close(21)
+
+return
+end subroutine
+
+! ===================================================================
+! SUBROTINA QUE ESCREVE UM ARQUIVO PLOT DA ENERGIA USANDO O GNUPLOT
+subroutine escreveArquivoPlotEnergia ()
+
+open(UNIT=21,FILE='graph.plt',ACTION='WRITE')
+
+write(21,*) "set title 'Variacao da energia'"
+write(21,*) "set grid"
+write(21,*) "set xlabel 'passos'"
+write(21,*) "set ylabel 'Energia'"
+write(21,*) "set yrange [0:1000]"
+write(21,*) "set terminal png"
+write(21,*) "set key bottom right"
+write(21,*) "set output 'grafico.png'"
+write(21,*) "plot 'dados.dat' title 'E_total' w l"
+
+close(21)
+
+return
+end subroutine

@@ -1,0 +1,5 @@
+! Algoritmo para determinar o maior número em ponto flutuante que somado a 1 resulta em 1, ou seja, qual é a precisão da máquina corrente
+
+	PROGRAM
+	
+	END
