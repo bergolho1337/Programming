@@ -1,9 +1,0 @@
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/CMakeFiles/rebuild_cache.dir
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/CMakeFiles/DucksAdapter.dir
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/CMakeFiles/edit_cache.dir
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/src/ducks/CMakeFiles/rebuild_cache.dir
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/src/ducks/CMakeFiles/duck.dir
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/src/ducks/CMakeFiles/edit_cache.dir
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/src/utils/CMakeFiles/rebuild_cache.dir
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/src/utils/CMakeFiles/utils.dir
-/home/berg/Github/Programming/C++/Design-Patterns-in-C++/Adapter/build/src/utils/CMakeFiles/edit_cache.dir

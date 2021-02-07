@@ -1,5 +1,6 @@
 // ---------------------------------------------------------------------------------------------
 // Adapter design pattern:
+// This program implements the Object Adapter by invoking Turkey functions inside a Duck object.
 // ---------------------------------------------------------------------------------------------
 
 #include <iostream>

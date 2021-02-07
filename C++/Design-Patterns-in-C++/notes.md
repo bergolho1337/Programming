@@ -39,4 +39,11 @@ The Command pattern decouples an object making requests from the objects that kn
 
 A RemoteControl which can control several devices in a smart-house is implemented to show the capabilities and advantages of this powerful pattern.
 
+## 7) Adapter
+
+The Adapter pattern converts the functions from an interface to be use by another. One common application of this pattern is in adapting a new library or code to
+a legacy one. There are two types of Adapters, the class Adapter, which considers multiple inheritance in its implementation and the object Adapter, which uses
+object composition. Together with the Decorator pattern the Adapter is applied in several libraries that needs to be extended and do not want to lose its functionality.
+
+We revisit the Duck code from chapter 1, by creating a Duck object that acts like a Turkey.
 

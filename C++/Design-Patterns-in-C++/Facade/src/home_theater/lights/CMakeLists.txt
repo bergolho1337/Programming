@@ -1,0 +1,7 @@
+set(SOURCE_FILES_LIGHT light.h light.cpp)
+
+ADD_LIBRARY(light STATIC ${SOURCE_FILES_LIGHT})
+
+if(NOT MSVC)
+    set_property(TARGET light PROPERTY POSITION_INDEPENDENT_CODE ON)
+endif()
