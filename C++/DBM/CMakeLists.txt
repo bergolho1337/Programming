@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 2.8)
+
+PROJECT(main)
+
+find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
+
+SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin" )
+
+ADD_EXECUTABLE(main MACOSX_BUNDLE main.cpp)
+
+TARGET_LINK_LIBRARIES(main ${VTK_LIBRARIES} m)
