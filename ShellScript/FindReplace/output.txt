@@ -1,0 +1,4 @@
+This is a sample file created in 2021 to demonstrate character substitution. 
+It will be used in 2021. 
+Linux has a wide array of tools for us to use to achieve this.
+2021 is a leap year.
