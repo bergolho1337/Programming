@@ -1,0 +1,7 @@
+set(SOURCE_FILES_MATRIX matrix.cpp matrix.h)
+
+ADD_LIBRARY(matrix STATIC ${SOURCE_FILES_MATRIX})
+
+if(NOT MSVC)
+    set_property(TARGET matrix PROPERTY POSITION_INDEPENDENT_CODE ON)
+endif()
