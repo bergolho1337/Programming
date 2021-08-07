@@ -17,6 +17,7 @@ typedef double (*Function_t)(double);
 
 // Function declarations
 double sigmoid (double x);
+double dsigmoid (double y);
 
 class Matrix
 {
@@ -30,11 +31,14 @@ public:
     void add (Matrix *in);
     void multiply (const double value);
     void multiply (Matrix *in);
-    Matrix* transpose ();
+    void map (Function_t f);
     void randomize ();
     void print ();
-    void map (Function_t f);
+    void print (std::string message);
+    static Matrix* map (Matrix *a, Function_t f);
+    static Matrix* subtract (Matrix *a, Matrix *b);
     static Matrix* matrix_multiply (Matrix *a, Matrix *b);
+    static Matrix* transpose (Matrix *a);
     static Matrix* convert_from_array (std::vector<double> arr);
     static std::vector<double> convert_to_array (Matrix *a);
 };

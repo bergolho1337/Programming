@@ -19,3 +19,13 @@ double map_function (const double x, const double min_x1, const double max_x1, c
 {
     return ( max_x2 - min_x2 ) * ( (x - min_x1)/(max_x1-min_x1) ) + min_x2;
 }
+
+std::vector<double> compute_error (std::vector<double> a, std::vector<double> b)
+{
+    assert(a.size() == b.size());
+
+    std::vector<double> result;
+    for (uint32_t i = 0; i < a.size(); i++)
+        result.push_back(a[i]-b[i]);
+    return result;
+}

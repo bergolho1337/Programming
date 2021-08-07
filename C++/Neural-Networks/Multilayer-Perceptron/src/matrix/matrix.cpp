@@ -55,32 +55,46 @@ void Matrix::multiply (Matrix *in)
 
 Matrix* Matrix::matrix_multiply (Matrix *a, Matrix *b)
 {
-    assert(a->nrows == b->ncols);
+    assert(b->nrows == a->ncols);
     Matrix *out = new Matrix(a->nrows,b->ncols);
-    for (uint32_t i = 0; i < out->nrows; i++)
+    for (uint32_t i = 0; i < a->nrows; i++)
     {
-        for (uint32_t j = 0; j < out->ncols; j++)
+        for (uint32_t j = 0; j < b->ncols; j++)
         {
-            for (uint32_t k = 0; k < out->nrows; k++)
+            for (uint32_t k = 0; k < a->ncols; k++)
             {
-                out->data[i*out->ncols+j] += a->data[i*a->ncols+k]*b->data[k*b->ncols+j]; 
+                out->data[i*b->ncols+j] += a->data[i*a->ncols+k]*b->data[k*b->ncols+j]; 
             }
         }
     }
     return out;
 }
 
-Matrix* Matrix::transpose ()
+Matrix* Matrix::transpose (Matrix *a)
 {
-    Matrix *out = new Matrix(this->ncols,this->nrows);
-    for (uint32_t i = 0; i < out->nrows; i++)
+    Matrix *result = new Matrix(a->ncols,a->nrows);
+    for (uint32_t i = 0; i < a->nrows; i++)
     {
-        for (uint32_t j = 0; j < out->ncols; j++)
+        for (uint32_t j = 0; j < a->ncols; j++)
         {
-            out->data[j*this->ncols+i] = this->data[i*this->ncols+j]; 
+            result->data[j*a->ncols+i] = a->data[i*a->ncols+j]; 
         }
     }
-    return out;
+    return result;
+}
+
+Matrix* Matrix::subtract (Matrix *a, Matrix *b)
+{
+    assert(a->nrows == b->nrows && a->ncols == b->ncols);
+    Matrix *result = new Matrix(a->ncols,a->nrows);
+    for (uint32_t i = 0; i < a->nrows; i++)
+    {
+        for (uint32_t j = 0; j < a->ncols; j++)
+        {
+            result->data[i*a->ncols+j] = a->data[i*a->ncols+j]-b->data[i*a->ncols+j]; 
+        }
+    }
+    return result;
 }
 
 void Matrix::randomize ()
@@ -97,7 +111,7 @@ void Matrix::randomize ()
 Matrix* Matrix::convert_from_array (std::vector<double> arr)
 {
     uint32_t n = arr.size();
-    Matrix *result = new Matrix(n,1);
+    Matrix *result = new Matrix(1,n);
     for (uint32_t i = 0; i < n; i++)
         result->data[i] = arr[i];
     return result;
@@ -119,11 +133,25 @@ void Matrix::print ()
     {
         for (uint32_t j = 0; j < this->ncols; j++)
         {
-            printf("%5.2lf ",this->data[i*this->ncols+j]);
+            printf("%5lf ",this->data[i*this->ncols+j]);
         }
         printf("\n");
     }
     printf("----------------------------------------------------------\n");
+}
+
+void Matrix::print (std::string message)
+{
+    printf("----------------------- %s -------------------------------\n",message.c_str());
+    for (uint32_t i = 0; i < this->nrows; i++)
+    {
+        for (uint32_t j = 0; j < this->ncols; j++)
+        {
+            printf("%5lf ",this->data[i*this->ncols+j]);
+        }
+        printf("\n");
+    }
+    printf("----------------------- %s -------------------------------\n",message.c_str());
 }
 
 void Matrix::map (Function_t f)
@@ -137,8 +165,26 @@ void Matrix::map (Function_t f)
     }
 }
 
+Matrix* Matrix::map (Matrix *a, Function_t f)
+{
+    Matrix *result = new Matrix(a->nrows,a->ncols);
+    for (uint32_t i = 0; i < a->nrows; i++)
+    {
+        for (uint32_t j = 0; j < a->ncols; j++)
+        {
+            result->data[i*a->ncols+j] = f(a->data[i*a->ncols+j]);
+        }
+    }
+    return result;
+}
+
 // Functions implementations
 double sigmoid (double x)
 {
     return 1 / (1 + exp(-x));
+}
+
+double dsigmoid (double y)
+{
+    return y * (1 - y);
 }
