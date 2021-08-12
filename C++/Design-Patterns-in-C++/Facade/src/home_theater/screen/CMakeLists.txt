@@ -1,7 +1,0 @@
-set(SOURCE_FILES_SCREEN screen.h screen.cpp)
-
-ADD_LIBRARY(screen STATIC ${SOURCE_FILES_SCREEN})
-
-if(NOT MSVC)
-    set_property(TARGET screen PROPERTY POSITION_INDEPENDENT_CODE ON)
-endif()

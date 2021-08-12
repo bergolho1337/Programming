@@ -1,7 +1,0 @@
-set(SOURCE_FILES_POPCORN popcorn.h popcorn.cpp)
-
-ADD_LIBRARY(popcorn STATIC ${SOURCE_FILES_POPCORN})
-
-if(NOT MSVC)
-    set_property(TARGET popcorn PROPERTY POSITION_INDEPENDENT_CODE ON)
-endif()

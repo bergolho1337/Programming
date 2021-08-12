@@ -1,7 +1,0 @@
-set(SOURCE_FILES_CHOCOLATE boiler.cpp boiler.h)
-
-ADD_LIBRARY(chocolate STATIC ${SOURCE_FILES_CHOCOLATE})
-
-if(NOT MSVC)
-    set_property(TARGET chocolate PROPERTY POSITION_INDEPENDENT_CODE ON)
-endif()
