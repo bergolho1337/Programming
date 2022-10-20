@@ -1,0 +1,10 @@
+5
+Joao 50 NULL
+Maria 27 Joao
+Joana 6 Maria
+Carlos 30 Joao
+Gisele 2 Maria
+3
+Gisele Joao
+Carlos Joao
+Joana Maria

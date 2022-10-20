@@ -1,62 +1,62 @@
-// Simple program to test the STL map for building a unique set of Triangles
+// Simple program to test the STL map for building a unique set of Points
 
 #include <iostream>
 #include <set>
 #include <map>
 
-class Triangle
+class Point
 {
 public:
-	int v0;
-	int v1;
-	int v2;
+	uint32_t id;
+	double pos[3];
 public:
-	Triangle (const int v0, const int v1, const int v2)
+	Point (const uint32_t id, const double x, const double y, const double z)
 	{
-		this->v0 = v0;
-		this->v1 = v1;
-		this->v2 = v2;
+		this->id = id;
+		this->pos[0] = x;
+		this->pos[1] = y;
+		this->pos[2] = z;
 	}
 	void print ()
 	{
-		printf("[%d %d %d]\n",this->v0,this->v1,this->v2);
+		printf("%u = (%lf %lf %lf)\n",this->id,this->pos[0],this->pos[1],this->pos[2]);
 	}
 	// To use the map, you must define the operator '<' for the class
-	bool operator <(const Triangle& tri) const
+	bool operator <(const Point& point) const
     {
-        return (this->v0 < tri.v0) || \
-               ((!(tri.v0 < this->v0)) && (this->v1 < tri.v1)) || \
-               ((!(tri.v0 < this->v0)) && (!(tri.v1 < this->v1)) && (this->v2 < tri.v2));
+        return (this->pos[0] < point.pos[0]) || \
+               ((!(point.pos[0] < this->pos[0])) && (this->pos[1] < point.pos[1])) || \
+               ((!(point.pos[0] < this->pos[0])) && (!(point.pos[1] < this->pos[1])) && (this->pos[2] < point.pos[2]));
     }
 };
 
 int main (int argc, char *argv[])
 {
-	Triangle t1(1,2,3);
-	Triangle t2(4,5,6);
-	Triangle t3(7,8,9);
-	Triangle t4(1,2,3);
-	Triangle t5(4,5,6);
-	Triangle t6(7,8,9);
+	Point p1(0,1,2,3);
+	Point p2(1,4,5,6);
+	Point p3(2,7,8,9);
+	Point p4(3,1,2,3);
+	Point p5(4,4,5,6);
+	Point p6(5,7,8,9);
 
-	std::pair<std::map<Triangle,int>::iterator,bool> ret;
-	std::map<Triangle,int> unique_triangles;
-	ret = unique_triangles.insert( std::pair<Triangle,int>(t1,1) );
-	(ret.second) ? printf("[+] SUCESS!\n") : printf("[-] FAIL!\n");
-	ret = unique_triangles.insert( std::pair<Triangle,int>(t2,2) );
-	(ret.second) ? printf("[+] SUCESS!\n") : printf("[-] FAIL!\n");
-	ret = unique_triangles.insert( std::pair<Triangle,int>(t3,3) );
-	(ret.second) ? printf("[+] SUCESS!\n") : printf("[-] FAIL!\n");
-	ret = unique_triangles.insert( std::pair<Triangle,int>(t4,4) );
-	(ret.second) ? printf("[+] SUCESS!\n") : printf("[-] FAIL!\n");
-	ret = unique_triangles.insert( std::pair<Triangle,int>(t5,5) );
-	(ret.second) ? printf("[+] SUCESS!\n") : printf("[-] FAIL!\n");
-	ret = unique_triangles.insert( std::pair<Triangle,int>(t6,6) );
-	(ret.second) ? printf("[+] SUCESS!\n") : printf("[-] FAIL!\n");
+	std::pair<std::set<Point>::iterator,bool> ret;
+	std::set<Point> unique_points;
+	ret = unique_points.insert( p1 );
+	if (ret.second) printf("SUCESS!\n"); else printf("FAIL!\n"); 
+	ret = unique_points.insert( p2 );
+	if (ret.second) printf("SUCESS!\n"); else printf("FAIL!\n");
+	ret = unique_points.insert( p3 );
+	if (ret.second) printf("SUCESS!\n"); else printf("FAIL!\n");
+	ret = unique_points.insert( p4 );
+	if (ret.second) printf("SUCESS!\n"); else printf("FAIL!\n");
+	ret = unique_points.insert( p5 );
+	if (ret.second) printf("SUCESS!\n"); else printf("FAIL!\n");
+	ret = unique_points.insert( p6 );
+	if (ret.second) printf("SUCESS!\n"); else printf("FAIL!\n");
 
-	for (auto it = unique_triangles.begin(); it != unique_triangles.end(); ++it)
+	for (auto it = unique_points.begin(); it != unique_points.end(); ++it)
 	{
-		printf("[key,value] = [{%d,%d,%d},%d]\n",it->first.v0,it->first.v1,it->first.v2,it->second);
+		printf("Id = %u --> (%lf, %lf, %lf)\n",it->id,it->pos[0],it->pos[1],it->pos[2]);
 	}
 
 	return 0;

@@ -18,6 +18,14 @@ def plot_data(x, y):
 	plt.show()
 	#plt.savefig("function.svg")
 
+def linear_function (x1, y1, x2, y2):
+	a = (y2-y1)/(x2-x1)
+	b = (y1*x2 - y2*x1)/(x2-x1)
+	x = np.linspace(x1,x2,100)
+	y = a*x + b
+	print("a = %g" % (a))
+	print("b = %g" % (b))
+	return x, y
 
 def main():
 	if len(sys.argv) != 2:
@@ -33,6 +41,10 @@ def main():
 	x, y = read_data(input_file)
 
 	plot_data(x,y)
+	#xfit, yfit = linear_function(50,0.0013,250,0.00724)
+	#plt.plot(x,y,label="ref",c="red",linewidth=3.0)
+	#plt.plot(xfit,yfit,label="aprox",c="blue",linewidth=3.0)
+	#plt.show()
 
 
 if __name__ == "__main__":

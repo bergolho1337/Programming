@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 2.8)
+
+PROJECT(Perceptron)
+
+SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin" )
+
+FIND_PACKAGE(VTK REQUIRED)
+INCLUDE(${VTK_USE_FILE})
+
+ADD_SUBDIRECTORY(src/perceptron)
+ADD_SUBDIRECTORY(src/utils)
+
+ADD_EXECUTABLE(Perceptron MACOSX_BUNDLE src/main.cpp)
+
+ADD_DEPENDENCIES(Perceptron perceptron utils)
+
+TARGET_LINK_LIBRARIES(Perceptron ${VTK_LIBRARIES} perceptron utils dl m)
